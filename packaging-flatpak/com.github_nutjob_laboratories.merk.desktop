@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=MERK
+GenericName=IRC Client
+Comment=Fast, minimal Python IRC client
+Exec=merk %U
+Icon=com.github_nutjob_laboratories.merk
+Terminal=false
+Categories=Network;Chat;InstantMessaging;
+MimeType=x-scheme-handler/irc;x-scheme-handler/ircs;
+Keywords=IRC;Chat;Merk;Twisted;PyQt;

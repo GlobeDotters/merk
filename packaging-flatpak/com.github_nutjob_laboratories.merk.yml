@@ -1,0 +1,43 @@
+app-id: com.github_nutjob_laboratories.merk
+runtime: org.kde.Platform
+runtime-version: "6.8"
+sdk: org.kde.Sdk
+
+base: io.qt.qtwebengine.BaseApp
+base-version: "6.8"
+
+command: merk
+
+finish-args:
+  - --socket=x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --share=network
+  - --device=dri
+  - --filesystem=home
+
+modules:
+  - name: merk
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network     # allow pip to reach PyPI during build
+    build-commands:
+      - install -Dm755 merk-launcher.sh /app/bin/merk
+      - install -Dm644 com.github_nutjob_laboratories.merk.desktop /app/share/applications/com.github_nutjob_laboratories.merk.desktop
+      - install -Dm644 com.github_nutjob_laboratories.merk.metainfo.xml /app/share/metainfo/com.github_nutjob_laboratories.merk.metainfo.xml
+      - install -Dm644 com.github_nutjob_laboratories.merk.png /app/share/icons/hicolor/256x256/apps/com.github_nutjob_laboratories.merk.png
+      - mkdir -p /app/share/merk && cp -r . /app/share/merk
+      - pip3 install --prefix=/app PyQt5 "Twisted[tls]" pyOpenSSL service_identity emoji
+    sources:
+      - type: git
+        url: https://github.com/GlobeDotters/merk.git
+        branch: main
+      - type: file
+        path: merk-launcher.sh
+      - type: file
+        path: com.github_nutjob_laboratories.merk.desktop
+      - type: file
+        path: com.github_nutjob_laboratories.merk.metainfo.xml
+      - type: file
+        path: com.github_nutjob_laboratories.merk.png
