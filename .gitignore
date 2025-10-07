@@ -6,3 +6,34 @@ merk_setup.iss
 *.exe
 *.zip
 downloads/*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.env/
+
+# Flatpak build outputs
+.flatpak-builder/
+build-dir/
+packaging-flatpak/repo/
+*.flatpak
+*.flatpakref
+*.tar
+*.tar.gz
+
+# Temporary / cache
+*.log
+*.bak
+*.swp
+*.tmp
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# OS metadata
+*~
