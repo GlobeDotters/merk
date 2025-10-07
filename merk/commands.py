@@ -27,7 +27,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5 import QtCore
-from PyQt5.QtMultimedia import QSound
+from merk._qsound import QSound
 
 SSL_AVAILABLE = True
 try:
@@ -3756,21 +3756,20 @@ def executeCommonCommands(gui,window,user_input,is_script,line_number=0,script_i
 				# Check for sanity
 				check = check_for_sane_values(my_setting,my_value)
 				if check!=ALL_VALID_SETTINGS:
+					reason = "unknown"
 					if check==INVALID_STYLE:
 						qlist = [f"\"{item}\"" for item in QStyleFactory.keys()]
-						reason = f"must be {", ".join(qlist[:-1]) + " or " + qlist[-1]}"
+						reason = f"must be {', '.join(qlist[:-1]) + ' or ' + qlist[-1]}"
 					elif check==INVALID_JUSTIFY:
 						reason = "must be \"center\", \"left\", or \"right\""
 					elif check==INVALID_COLOR:
-						reason = f"not a recognized color"
+						reason = "not a recognized color"
 					elif check==INVALID_LANGUAGE:
-						reason = f"not a valid spellchecker language"
+						reason = "not a valid spellchecker language"
 					elif check==INVALID_TEXT_STYLE:
-						reason = f"not a valid text style"
+						reason = "not a valid text style"
 					elif check==INVALID_ORDER:
 						reason = "must be \"creation\", \"stacking\", or \"activation\""
-					else:
-						reason = "unknown"
 					if is_script:
 						add_halt(script_id)
 						if config.DISPLAY_SCRIPT_ERRORS:

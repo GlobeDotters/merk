@@ -30,7 +30,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5 import QtCore
-from PyQt5.QtMultimedia import QSound
+from merk._qsound import QSound
 
 import twisted
 import platform

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-export PYTHONPATH="/app/share/merk:${PYTHONPATH:-}"
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.var/app/com.github_nutjob_laboratories.merk/config}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.var/app/com.github_nutjob_laboratories.merk/data}"
-exec python3 -m merk
+APP_DIR="/app/share/io.github.NutjobLaboratories.Merk"
+export PYTHONPATH="${APP_DIR}:${PYTHONPATH:-}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.var/app/io.github.NutjobLaboratories.Merk/config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.var/app/io.github.NutjobLaboratories.Merk/data}"
+exec python3 "${APP_DIR}/merk.py"

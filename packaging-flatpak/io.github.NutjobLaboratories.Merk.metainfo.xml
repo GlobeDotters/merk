@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.NutjobLaboratories.Merk</id>
+  <name>MERK</name>
+  <summary>Multiple-document IRC client built with PyQt</summary>
+  <developer_name>Nutjob Laboratories</developer_name>
+  <update_contact>nutjob-laboratories@users.noreply.github.com</update_contact>
+  <description>
+    <p>MERK is a lightweight IRC client written in Python and PyQt. It focuses on a clean interface,
+    responsive behavior, and the essentials for everyday IRC chatting without unnecessary bloat.</p>
+    <ul>
+      <li>Connect to multiple servers and channels simultaneously</li>
+      <li>Scriptable command system compatible with traditional IRC workflows</li>
+      <li>Spellchecking, themes, and extensive UI customization options</li>
+    </ul>
+  </description>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <url type="homepage">https://github.com/nutjob-laboratories/merk</url>
+  <url type="bugtracker">https://github.com/nutjob-laboratories/merk/issues</url>
+  <url type="donation">https://gofund.me/ae062139</url>
+  <launchable type="desktop-id">io.github.NutjobLaboratories.Merk.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/nutjob-laboratories/merk/main/packaging-flatpak/screenshots/screenshot_linux_big.png</image>
+      <caption>Default MERK layout connected to multiple channels</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nutjob-laboratories/merk/main/packaging-flatpak/screenshots/settings.png</image>
+      <caption>Preferences dialog showing appearance settings</caption>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="0.050.756" date="2024-10-07">
+      <description><p>Latest upstream development snapshot packaged for Flatpak.</p></description>
+    </release>
+  </releases>
+  <categories>
+    <category>Network</category>
+    <category>Chat</category>
+  </categories>
+  <content_rating type="oars-1.1"/>
+</component>

@@ -1,0 +1,10 @@
+# Core runtime dependencies for the MERK Flatpak build.
+# Run `pip-compile --generate-hashes --output-file=packaging-flatpak/requirements.txt packaging-flatpak/requirements.in`
+# whenever these versions need to be refreshed.
+emoji==2.15.0
+pyopenssl==25.3.0
+pyqt5==5.15.11
+pyspellchecker==0.8.3
+qt5reactor==0.6.3
+service-identity==24.2.0
+twisted==25.5.0

@@ -176,7 +176,7 @@ def render_message(message,style,client=None,no_padding=False):
 	# Messages from /list results are special, and thus have their message built here
 	# rather than being built from the default Message() object
 	if message.type==LIST_MESSAGE:
-		link = f"<a href=\"{message.channel}\"><span style=\"{style["hyperlink"]}\">{message.channel}</span></a>"
+		link = f"<a href=\"{message.channel}\"><span style=\"{style['hyperlink']}\">{message.channel}</span></a>"
 		if len(message.channel_topic)>0:
 			msg_to_display = link+" ("+message.channel_count+" users) - \""+message.channel_topic+"\""
 		else:
@@ -191,12 +191,12 @@ def render_message(message,style,client=None,no_padding=False):
 		if message.type==RAW_SYSTEM_MESSAGE or message.type==SYSTEM_MESSAGE:
 			msg_to_display = html.escape(msg_to_display)
 
-	if config.CONVERT_CHANNELS_TO_LINKS:
-		if client!=None:
-			if config.DO_NOT_APPLY_STYLES_TO_TEXT:
-				mystyle = f"color:{foreground};"
-			else:
-				mystyle = style["hyperlink"]
+		if config.CONVERT_CHANNELS_TO_LINKS:
+			if client!=None:
+				if config.DO_NOT_APPLY_STYLES_TO_TEXT:
+					mystyle = f"color:{foreground};"
+				else:
+					mystyle = style['hyperlink']
 			if message.type!=SYSTEM_MESSAGE and message.type!=ERROR_MESSAGE and message.type!=SERVER_MESSAGE and message.type!=RAW_SYSTEM_MESSAGE and message.type!=WHOIS_MESSAGE and message.type!=LIST_MESSAGE:
 				try:
 					d = []

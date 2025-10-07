@@ -1,0 +1,60 @@
+app-id: io.github.NutjobLaboratories.Merk
+runtime: org.kde.Platform
+runtime-version: '5.15-23.08'
+sdk: org.kde.Sdk
+command: merk
+
+finish-args:
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --talk-name=org.kde.StatusNotifierWatcher
+  - --filesystem=xdg-desktop
+  - --filesystem=xdg-download
+  - --persist=merk
+  - --env=QT_AUTO_SCREEN_SCALE_FACTOR=1
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/man
+  - '*.la'
+  - '*.a'
+
+modules:
+  - name: python-deps
+    buildsystem: simple
+    build-options:
+      build-args:
+        - --share=network
+    build-commands:
+      - pip3 install --no-cache --require-hashes --prefix=/app -r requirements.txt
+    sources:
+      - type: file
+        path: requirements.txt
+
+  - name: merk
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 packaging-flatpak/merk-launcher.sh /app/bin/merk
+      - install -d /app/share/io.github.NutjobLaboratories.Merk
+      - cp -r merk /app/share/io.github.NutjobLaboratories.Merk/
+      - install -Dm644 merk.py /app/share/io.github.NutjobLaboratories.Merk/merk.py
+      - install -Dm644 packaging-flatpak/io.github.NutjobLaboratories.Merk.desktop /app/share/applications/io.github.NutjobLaboratories.Merk.desktop
+      - install -Dm644 packaging-flatpak/io.github.NutjobLaboratories.Merk.metainfo.xml /app/share/metainfo/io.github.NutjobLaboratories.Merk.metainfo.xml
+      - install -Dm644 packaging-flatpak/icons/16/io.github.NutjobLaboratories.Merk.png  /app/share/icons/hicolor/16x16/apps/io.github.NutjobLaboratories.Merk.png
+      - install -Dm644 packaging-flatpak/icons/24/io.github.NutjobLaboratories.Merk.png  /app/share/icons/hicolor/24x24/apps/io.github.NutjobLaboratories.Merk.png
+      - install -Dm644 packaging-flatpak/icons/32/io.github.NutjobLaboratories.Merk.png  /app/share/icons/hicolor/32x32/apps/io.github.NutjobLaboratories.Merk.png
+      - install -Dm644 packaging-flatpak/icons/48/io.github.NutjobLaboratories.Merk.png  /app/share/icons/hicolor/48x48/apps/io.github.NutjobLaboratories.Merk.png
+      - install -Dm644 packaging-flatpak/icons/64/io.github.NutjobLaboratories.Merk.png  /app/share/icons/hicolor/64x64/apps/io.github.NutjobLaboratories.Merk.png
+      - install -Dm644 packaging-flatpak/icons/128/io.github.NutjobLaboratories.Merk.png /app/share/icons/hicolor/128x128/apps/io.github.NutjobLaboratories.Merk.png
+      - install -Dm644 packaging-flatpak/icons/256/io.github.NutjobLaboratories.Merk.png /app/share/icons/hicolor/256x256/apps/io.github.NutjobLaboratories.Merk.png
+      - install -Dm644 packaging-flatpak/icons/512/io.github.NutjobLaboratories.Merk.png /app/share/icons/hicolor/512x512/apps/io.github.NutjobLaboratories.Merk.png
+
+    sources:
+      - type: dir
+        path: ..
+      # for Flathub, switch to a tagged tarball + sha256
+    

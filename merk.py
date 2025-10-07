@@ -76,7 +76,7 @@ parser = argparse.ArgumentParser(
 https://github.com/nutjob-laboratories/merk
 https://github.com/danhetrick
 
-Available Qt widget styles: {", ".join(QStyleFactory.keys())}
+Available Qt widget styles: {', '.join(QStyleFactory.keys())}
 ''',
 	epilog=f'''
 © {datetime.now().year} Copyright Daniel Hetrick
@@ -140,7 +140,7 @@ if __name__ == '__main__':
 		else:
 			# Tell user the style is invalid and exit
 			sys.stdout.write(f"Invalid Qt window style: {args.qtstyle}\n")
-			sys.stdout.write(f"Valid available styles: {", ".join(QStyleFactory.keys())}\n")
+			sys.stdout.write(f"Valid available styles: {', '.join(QStyleFactory.keys())}\n")
 			exit(1)
 
 	app = QApplication([])
@@ -264,11 +264,11 @@ if __name__ == '__main__':
 		# applied to them
 		app.setStyleSheet(f"""
 			QMenu::separator {{
-				background-color: {styles.parseColor(style["separator"])};
+				background-color: {styles.parseColor(style['separator'])};
 				height: 1px;
 			}}
 			QGroupBox {{
-				border: 1px solid {styles.parseColor(style["separator"])};
+				border: 1px solid {styles.parseColor(style['separator'])};
 			}}
 			""")
 

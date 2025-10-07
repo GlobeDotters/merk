@@ -290,7 +290,7 @@ class IRC_Connection(irc.IRCClient):
 	def connectionMade(self):
 
 		if config.WRITE_INPUT_AND_OUTPUT_TO_FILE:
-			dump_filename = os.path.join(config.CONFIG_DIRECTORY, f"{self.kwargs["server"]}-{self.kwargs["port"]}.txt")
+			dump_filename = os.path.join(config.CONFIG_DIRECTORY, f"{self.kwargs['server']}-{self.kwargs['port']}.txt")
 			self.dump_file = open(dump_filename,"a")
 
 		self.sendLine("CAP REQ :chghost")
@@ -948,11 +948,11 @@ class IRC_Connection(irc.IRCClient):
 		line = line2.encode('utf-8')
 
 		if config.WRITE_INPUT_AND_OUTPUT_TO_CONSOLE:
-			sys.stdout.write(f"{self.kwargs["server"]}:{self.kwargs["port"]} {line}\n")
+			sys.stdout.write(f"{self.kwargs['server']}:{self.kwargs['port']} {line}\n")
 
 		if config.WRITE_INPUT_AND_OUTPUT_TO_FILE:
 			try:
-				self.dump_file.write(f"{int(time.time())}\t{self.kwargs["server"]}:{self.kwargs["port"]} {line}\n")
+				self.dump_file.write(f"{int(time.time())}\t{self.kwargs['server']}:{self.kwargs['port']} {line}\n")
 			except:
 				pass
 
@@ -1364,5 +1364,3 @@ class IRC_ReConnection_Factory(protocol.ReconnectingClientFactory):
 					msgBox.setWindowTitle("Connection failed")
 					msgBox.setStandardButtons(QMessageBox.Ok)
 					msgBox.exec()
-
-
