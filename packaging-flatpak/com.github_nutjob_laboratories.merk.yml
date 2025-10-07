@@ -1,43 +1,59 @@
 app-id: com.github_nutjob_laboratories.merk
 runtime: org.kde.Platform
-runtime-version: "6.8"
+runtime-version: '5.15-23.08'
 sdk: org.kde.Sdk
-
-base: io.qt.qtwebengine.BaseApp
-base-version: "6.8"
-
 command: merk
 
 finish-args:
-  - --socket=x11
   - --socket=wayland
-  - --socket=pulseaudio
-  - --share=network
+  - --socket=fallback-x11
   - --device=dri
-  - --filesystem=home
+  - --share=network
+  - --persist=merk
+  - --env=QT_AUTO_SCREEN_SCALE_FACTOR=1
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/man
+  - '*.la'
+  - '*.a'
 
 modules:
+  - name: python-deps
+    buildsystem: simple
+    build-commands:
+      - pip3 install --no-cache --require-hashes --prefix=/app -r requirements.txt
+    sources:
+  - type: archive
+    url: https://github.com/GlobeDotters/merk/archive/refs/tags/v0.9.2.tar.gz
+    sha256: <computed-checksum>
+
   - name: merk
     buildsystem: simple
-    build-options:
-      build-args:
-        - --share=network     # allow pip to reach PyPI during build
     build-commands:
-      - install -Dm755 merk-launcher.sh /app/bin/merk
-      - install -Dm644 com.github_nutjob_laboratories.merk.desktop /app/share/applications/com.github_nutjob_laboratories.merk.desktop
-      - install -Dm644 com.github_nutjob_laboratories.merk.metainfo.xml /app/share/metainfo/com.github_nutjob_laboratories.merk.metainfo.xml
-      - install -Dm644 com.github_nutjob_laboratories.merk.png /app/share/icons/hicolor/256x256/apps/com.github_nutjob_laboratories.merk.png
-      - mkdir -p /app/share/merk && cp -r . /app/share/merk
-      - pip3 install --prefix=/app PyQt5 "Twisted[tls]" pyOpenSSL service_identity emoji
+      - install -Dm755 packaging-flatpak/merk-launcher.sh /app/bin/merk
+      - install -d /app/share/merk
+      - cp -r merk/* /app/share/merk/
+      - install -Dm644 packaging-flatpak/com.github_nutjob_laboratories.merk.desktop /app/share/applications/com.github_nutjob_laboratories.merk.desktop
+      - install -Dm644 packaging-flatpak/com.github_nutjob_laboratories.merk.metainfo.xml /app/share/metainfo/com.github_nutjob_laboratories.merk.metainfo.xml
+      - install -Dm644 packaging-flatpak/icons/16/com.github_nutjob_laboratories.merk.png  /app/share/icons/hicolor/16x16/apps/com.github_nutjob_laboratories.merk.png
+      - install -Dm644 packaging-flatpak/icons/24/com.github_nutjob_laboratories.merk.png  /app/share/icons/hicolor/24x24/apps/com.github_nutjob_laboratories.merk.png
+      - install -Dm644 packaging-flatpak/icons/32/com.github_nutjob_laboratories.merk.png  /app/share/icons/hicolor/32x32/apps/com.github_nutjob_laboratories.merk.png
+      - install -Dm644 packaging-flatpak/icons/48/com.github_nutjob_laboratories.merk.png  /app/share/icons/hicolor/48x48/apps/com.github_nutjob_laboratories.merk.png
+      - install -Dm644 packaging-flatpak/icons/64/com.github_nutjob_laboratories.merk.png  /app/share/icons/hicolor/64x64/apps/com.github_nutjob_laboratories.merk.png
+      - install -Dm644 packaging-flatpak/icons/128/com.github_nutjob_laboratories.merk.png /app/share/icons/hicolor/128x128/apps/com.github_nutjob_laboratories.merk.png
+      - install -Dm644 packaging-flatpak/icons/256/com.github_nutjob_laboratories.merk.png /app/share/icons/hicolor/256x256/apps/com.github_nutjob_laboratories.merk.png
+
     sources:
-      - type: git
-        url: https://github.com/GlobeDotters/merk.git
-        branch: main
-      - type: file
-        path: merk-launcher.sh
-      - type: file
-        path: com.github_nutjob_laboratories.merk.desktop
-      - type: file
-        path: com.github_nutjob_laboratories.merk.metainfo.xml
-      - type: file
-        path: com.github_nutjob_laboratories.merk.png
+      - type: dir
+        path: .
+      # for Flathub, switch to a tagged tarball + sha256
+    
+# locale slimming:
+add-extensions:
+  org.flatpak.Locale:
+    directory: share/runtime/locale
+    subdirectories: true
+    version: '5.15-23.08'
+    locale-subset: [ en ]

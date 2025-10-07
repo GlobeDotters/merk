@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
-export PYTHONPATH="/app/lib/python3.13/site-packages:/app/lib/python3.12/site-packages:/app/lib/python3.11/site-packages:$PYTHONPATH"
-cd /app/share/merk
-exec python3 merk.py "$@"
+set -euo pipefail
+export PYTHONPATH="/app/share/merk:${PYTHONPATH:-}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.var/app/com.github_nutjob_laboratories.merk/config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.var/app/com.github_nutjob_laboratories.merk/data}"
+exec python3 -m merk
