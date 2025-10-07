@@ -1,6 +1,6 @@
 # MERK Flatpak Packaging (branch: packaging/flatpak)
 
-_Last updated: 2025-02-14_
+_Last updated: 2025-10-08_
 
 This branch tracks the work needed to ship MERK as a Flatpak and eventually
 submit it to Flathub.  The upstream project is still PyQt5/Qt5-based, so the
